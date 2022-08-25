@@ -1,0 +1,94 @@
+{% include 'admin/cabecera.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.0-beta1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+  </body>
+</html><div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+    <div class="card-header">
+        Datos del libro
+    </div>
+    <div class="card-body">
+    
+      <form action="/admin/libros/guardar" method="post" enctype="multipart/form-data">
+<div class="mb-3">
+  <label for="txtNombre" class="form-label">Nombre del libro</label>
+  <input type="text" class="form-control" name="txtNombre" id="txtNombre" aria-describedby="helpId" placeholder="Aqui va el nombre del libro">
+  
+</div>
+<div class="mb-3">
+    <label for="txtImagen" class="form-label">Imagen</label>
+    <input type="file" class="form-control" name="txtImagen" id="txtImagen" aria-describedby="helpId" placeholder="Aqui va la imageb">
+    
+  </div>
+  <div class="mb-3">
+    <label for="txtURL" class="form-label">URL descarga</label>
+    <input type="text" class="form-control" name="txtURL" id="txtURL" aria-describedby="helpId" placeholder="Aqui va la URL">
+    
+  </div>
+ <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+    <div class="card-footer text-muted">
+        
+    </div>
+</div>
+        </div>
+        <div class="col-md-7">
+           <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>IMAGEN</th>
+                    <th>URL</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in libros %}
+                <tr>
+                    <td>{{ libro[0] }}</td>
+                    <td>{{ libro[1] }}</td>
+                    <td> <img width="60" src="/img/{{ libro[2] }}" class="img-fluid rounded-top" alt=""></td>
+                    <td>{{ libro[3] }}</td>
+                    <td>
+                        <form action='/admin/libros/borrar' method="post">
+                        <input hidden value="{{ libro[0] }}" type="text" name="txtID" id= "txtID">
+                          <button type="submit" class="btn btn-danger">Eliminar</button>
+                      </form>               
+
+
+                    </tr>
+                </tr>
+                {% endfor %} 
+            </tbody>
+           </table>
+           
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+    
+    
+{% include 'admin/pie.html' %}

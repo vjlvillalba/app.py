@@ -1,0 +1,112 @@
+{% include 'admin/cabecera.html' %}
+
+<div class="container">
+  <div class="row">
+     <!--<div class="col-md-3">
+      <div class="card">
+        <div class="card-header"> Datos del Cliente </div>
+        <div class="card-body">
+          <form action="/admin/libros/guardar" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+              <label for="txtNombre" class="form-label">Nombre de Cliente</label>
+              <input type="text" class="form-control" name="txtNombre" id="txtNombre" aria-describedby="helpId" placeholder="Aqui va el nombre del libro">
+            </div>
+            <div class="mb-3">
+              <label for="txtNombre" class="form-label">Nombre de Cliente</label>
+              <input type="text" class="form-control" name="txtNombre" id="txtNombre" aria-describedby="helpId" placeholder="Aqui va el nombre del libro">
+            </div>
+            <div class="mb-3">
+              <label for="txtURL" class="form-label">URL descarga</label>
+              <input type="text" class="form-control" name="txtURL" id="txtURL" aria-describedby="helpId" placeholder="Aqui va la URL">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+    </div>-->
+    
+    <div class="col-md-12">
+      <table class="table table-bordered table table-hover" id="myTable">   
+      <input type="number" id="myInput" onkeyup="myFunction()" placeholder="Búsqueda por cédula" title="Búsqueda por cédula">
+         <P>
+          <thead>          
+          <tr>            
+            <th>CÉDULA</th>
+            <th>NOMBRE</th>
+            <th>FECHA</th>
+            <th>ACCIONES</th>
+            <th>RESPONSABLE</th>
+            <th>ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>{% for cliente in cliente %}  <tr>            
+            <td>{{ cliente[1] }}</td>
+            <td>{{ cliente[2] }}</td>
+            <td>{{ cliente[3] }}</td>
+            <td>{{ cliente[3] }}</td>
+            <td>{{ cliente[3] }}</td>
+            <td>
+              <!--<form action='/admin/libros/borrar' method="post">
+                <input hidden value="{{ cliente[0] }}" type="text" name="txtID" id="txtID">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+               -->
+               <form action='/admin/libros/borrar' method="post">
+                    <input hidden value="{{ cliente[0] }}" type="text" name="txtID" id="txtID">
+                  <button type="submit" class="btn btn-success">Ver datos del cliente</button>
+                 
+                  <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modelId">
+                  
+                    Eliminar cliente
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">🛑Estas borrando un cliente🛑</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Estas a punto de eliminar el cliente<br> <br>{{ cliente[1] }}<br>{{ cliente[2] }}<br>{{ cliente[3] }}
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="submit" class="btn btn-danger" >Borrar Cliente</button>                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+              </form>
+          </tr>
+          </tr> {% endfor %} </tbody>
+      </table>
+
+      
+</div>
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+
+{% include 'admin/pie.html' %}
