@@ -125,7 +125,6 @@ def admin_libros_borrar():
     cursor.execute("SELECT imagen FROM libros WHERE id=%s",(_id))
     libro=cursor.fetchall()
     conexion.commit()
-    print(libro)
 
     if os.path.exists("templates/img/"+str(libro[0][0])):
         os.unlink("templates/img/"+str(libro[0][0]))
